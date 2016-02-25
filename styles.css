@@ -1,0 +1,64 @@
+html {
+    background: url(NETWORK.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+
+#search {
+     
+}
+
+h1 {
+    font-family:"myFont2";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 350%;
+    margin: -100px 0 0 -135px;
+    color: #FFF;
+}
+
+form {
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    margin: 0px 0 0 -170px;
+}
+
+input.text {
+    padding:8px 15px;
+    width: 300px;
+    background:rgba(0, 0, 0, 0);
+    border:2px solid #FFF;
+    color:#FFF;
+}
+
+input.button {
+    font-family:"myFont2";
+    font-weight:bold;
+    position:relative;
+    left:50%;
+    margin: 8px 0 0 -40px;
+    padding:8px 15px;
+    border:2px solid #555;
+    background-color:#FFF;
+    color:#555;
+}
+
+input.button:hover {
+    background-color:#555;
+    color:#FFF;
+}
+
+@font-face {
+    font-family:"myFont";
+    src: url(Fonts/Futura-2.ttf);
+}
+
+@font-face {
+    font-family:"myFont2";
+    src: url(Fonts/GOTHAM-LIGHT.ttf);
+}
