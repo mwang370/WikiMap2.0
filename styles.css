@@ -36,6 +36,10 @@ input.text {
     color:#FFF;
 }
 
+input.text:focus {
+    outline-width: 0;
+}
+
 input.button {
     font-family:"myFont2";
     font-weight:bold;
