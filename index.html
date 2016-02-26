@@ -12,25 +12,41 @@
   <body>
 
   <ul class ="pageNav">
-      <li><a href="/C:/WikiMap/test.html">ABOUT</a></li>
-      <li><a href="blog/">SOURCE CODE</a></li>
+      <li><a href="/C:/WikiMap/WikiMap2.0/about.html">ABOUT</a></li>
+      <li><a href="https://github.com/mwang370/WikiMap2.0">SOURCE CODE</a></li>
   </ul>
 
-    <div class = "banner">
-      <p>WIKIMAP</p>
+    <div class="banner">
+      <p class="title">WIKIMAP</p>
 
 
     </div>
 
     <div class = "search">
-      <form>
+      <form id = "frm1">
 
 	<input class = "text" type = "text" required>
-	<br>
-	<input class = "button" type = "button" value = "Search">
 
       </form>
+    <button onclick="myFunction()">Submit</button>
+
+    <p id="demo"></p>
+    
     </div>
+   
+    <script>
+      function myFunction() {
+      var x = document.getElementById("frm1");
+      var text = "";
+      var i;
+      for (i = 0; i < x.length ;i++) {
+		      text += x.elements[i].value + "<br>";
+		      }
+		      document.getElementById("demo").innerHTML = text;
+		      }
+		      </script>
+    
+    
 
   </body>
 
