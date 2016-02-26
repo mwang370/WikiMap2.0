@@ -42,7 +42,7 @@ a:hover{
      
 }
 
-p {
+p.title {
     font-family:"myFont2";
     position: absolute;
     top: 50%;
@@ -71,19 +71,20 @@ input.text:focus {
     outline-width: 0;
 }
 
-input.button {
+button {
     font-family:"myFont2";
     font-weight:bold;
-    position:relative;
+    position:absolute;
     left:50%;
-    margin: 8px 0 0 -40px;
+    top: 50%;
+    margin: 50px 0 0 -42px;
     padding:8px 15px;
     border:2px solid #555;
     background-color:#FFF;
     color:#555;
 }
 
-input.button:hover {
+button:hover {
     background-color:#555;
     color:#FFF;
 }
