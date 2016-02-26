@@ -1,4 +1,52 @@
 <!DOCTYPE html>
+
 <html>
+
   <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <link rel = "stylesheet" href = "styles.css">
+    <title>WikiMap</title>
+
+  </head>
+
+  <body>
+
+  <nav class="navbar navbar-default">
+	  <div class="container">
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+	      <a class="navbar-brand" href="#">WikiMaps</a>
+	    </div>
+	    <div class="collapse navbar-collapse" id="myNavbar">
+	      <ul class="nav navbar-nav navbar-right">
+	        <li><a href="#">ABOUT</a></li>
+	        <li><a href="#">SOURCE CODE</a></li>
+	      </ul>
+	    </div>
+	  </div>
+	</nav>
+
+    <div class = "banner">
+      <h1>WIKIMAP</h1>
+
+
+    </div>
+
+    <div class = "search">
+      <form>
+
+	<input class = "text" type = "text" required>
+	<br>
+	<input class = "button" type = "button" value = "Search">
+
+      </form>
+    </div>
+
+  </body>
+
+</html>
