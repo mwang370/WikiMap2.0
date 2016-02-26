@@ -52,6 +52,13 @@ p.title {
     color: #FFF;
 }
 
+p.search {
+    color: #FFF;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 form {
     position:absolute;
     top: 50%;
@@ -60,6 +67,7 @@ form {
 }
 
 input.text {
+    font-family:"myFont2";
     padding:8px 15px;
     width: 300px;
     background:rgba(0, 0, 0, 0);
