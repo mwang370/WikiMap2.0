@@ -42,13 +42,13 @@ a:hover{
      
 }
 
-h1 {
+p {
     font-family:"myFont2";
     position: absolute;
     top: 50%;
     left: 50%;
     font-size: 350%;
-    margin: -100px 0 0 -135px;
+    margin: -80px 0 0 -135px;
     color: #FFF;
 }
 
