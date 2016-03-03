@@ -3,7 +3,8 @@
 <html>
 
   <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script type="text/javascript" src="submit.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <link rel = "stylesheet" href = "styles.css">
     <title>WikiMap</title>
 
@@ -11,31 +12,33 @@
 
   <body>
 
-  <ul class ="pageNav">
-      <li><a href="/C:/WikiMap/WikiMap2.0/about.html">ABOUT</a></li>
-      <li><a href="https://github.com/mwang370/WikiMap2.0">SOURCE CODE</a></li>
-  </ul>
-
-    <div class="banner">
-      <p class="title">WIKIMAP</p>
-
-
-    </div>
-
-    <div class = "search">
-      <form id = "frm1">
-
-	<input class = "text" type = "text" required>
-
-      </form>
+    <div class="active" id="homePage">
+      <ul class ="pageNav">
+	<li><a href="/C:/WikiMap/WikiMap2.0/about.html">ABOUT</a></li>
+	<li><a href="https://github.com/mwang370/WikiMap2.0">SOURCE CODE</a></li>
+      </ul>
       
-    <button onclick="submitSearch()">Submit</button>
-
-    <p class = "search" id="search"></p>
-    
+      <div class="banner">
+	<p class="title">WIKIMAP</p>
+	
+	
+      </div>
+      
+      <div class="search">
+	<form id = "frm1">
+	  <input class="text" type="text" required>
+	</form>
+	
+	<button id="searchButton">Submit</button>
+	
+	<p class="search" id="search"></p>
+	
+      </div>
     </div>
-   
-    <script type="text/javascript" src="submit.js"></script>
+
+    <div class="inactive" id="searchPage">
+      <p>You clicked search!</p>
+    </div>
     
 
   </body>

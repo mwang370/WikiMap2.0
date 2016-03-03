@@ -1,24 +1,108 @@
+html {
+    font-family:"myFont2";
+    background: url(NETWORK.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+ul.pageNav {
+    padding:0;
+    list-style-type:none;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+ul.pageNav li{
+    display: inline;
+}
+
+ul.pageNav li a {
+    color: #FFF;
+    font-size: 16px;
+    padding: 12px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin: 0 4px;
+    text-decoration: none;
+    border: 1.5px solid #FFF;
+}
+
+
+a:hover{
+    background-color: #888;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
+#search {
+     
+}
+
+p.title {
+    font-family:"myFont2";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 350%;
+    margin: -80px 0 0 -135px;
+    color: #FFF;
+}
+
+p.search {
+    color: #FFF;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 form {
-    width:500px;
-    margin: 50px auto;
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    margin: 0px 0 0 -170px;
 }
 
-.search {
+input.text {
+    font-family:"myFont2";
     padding:8px 15px;
-    background:rgba(50, 50, 50, 0.2);
-    border:0px solid #dbdbdb;
+    width: 300px;
+    background:rgba(0, 0, 0, 0);
+    border:2px solid #FFF;
+    color:#FFF;
 }
 
-.button {
-    position:relative;
-    padding:6px 15px;
-    left: -8px;
-    border:2px solid #207cca;
-    background-color:#207cca;
-    color:#fafafa;
+input.text:focus {
+    outline-width: 0;
 }
 
-.button:hover {
-    background-color:#fafafa;
-    color:#207cca;
+button {
+    font-family:"myFont2";
+    font-weight:bold;
+    position:absolute;
+    left:50%;
+    top: 50%;
+    margin: 50px 0 0 -42px;
+    padding:8px 15px;
+    border:2px solid #555;
+    background-color:#FFF;
+    color:#555;
+}
+
+button:hover {
+    background-color:#555;
+    color:#FFF;
+}
+
+@font-face {
+    font-family:"myFont";
+    src: url(Fonts/Futura-2.ttf);
+}
+
+@font-face {
+    font-family:"myFont2";
+    src: url(Fonts/GOTHAM-LIGHT.ttf);
 }

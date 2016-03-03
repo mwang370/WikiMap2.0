@@ -4,7 +4,7 @@ html {
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-    background-size: cover;
+    //background-size: cover;
 }
 
 ul.pageNav {
@@ -95,6 +95,10 @@ button {
 button:hover {
     background-color:#555;
     color:#FFF;
+}
+
+.inactive {
+    display:none;
 }
 
 @font-face {
