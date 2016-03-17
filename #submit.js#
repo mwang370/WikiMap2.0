@@ -34,12 +34,5 @@ function changePage() {
 
 
 function webScrape(input) {
-    $.ajax({
-	type: "POST",
-	url: "webscraper.py",
-	data: { param: input}
-    }).done(function( o ) {
-	console.log(data);
-	console.log(input);
-    });
+    
 }
