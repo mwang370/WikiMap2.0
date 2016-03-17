@@ -8,11 +8,24 @@
 //    document.getElementById("search").innerHTML = text;
 //};
 
-var main = function() {
-    $('#searchButton').click(function() {
-	$('#homePage').addClass('inactive');
-	$('#searchPage').removeClass('inactive');
-    });
-};
+//var main = function() {
+//    $('#searchButton').click(function() {
+//	$('#homePage').addClass('inactive');
+//	$('#searchPage').removeClass('inactive');
+//    });
+//};
 
-$(document).ready(main);
+//$(document).ready(main);
+
+function changePage() {
+    $('#homePage').addClass('inactive');
+    $('#searchPage').removeClass('inactive');
+    document.getElementById("main").style.background = "url(white.png) no-repeat center center fixed";
+    var x = document.getElementById("textbar");
+    var text = "";
+    var i;
+    for (i = 0; i < x.length; i++) {
+	text = x.elements[i].value + "<br>";
+    }
+    document.getElementById("topic").innerHTML = text;
+}

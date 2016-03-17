@@ -38,8 +38,9 @@ a:hover{
     -webkit-box-shadow: none;
 }
 
-#search {
-     
+#topic {
+    text-align:center;
+    font-size: 400%;
 }
 
 p.title {

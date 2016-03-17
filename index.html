@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html>
+<html id="main">
 
   <head>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -24,17 +24,18 @@
       </div>
       
       <div class="search">
-	<form id = "frm1">
+	<form id="textbar">
 	  <input class="text" type="text" required>
 	</form>
-	<button id="searchButton">Submit</button>
+	<button id="searchButton" onclick="changePage()">Submit</button>
 	<p class="search" id="search"></p>
       </div>
       
     </div>
 
     <div class="inactive" id="searchPage">
-      <p>You clicked search!</p>
+      <p id="topic"></p>
+      <p id="summary"></p>
     </div>
     
 
