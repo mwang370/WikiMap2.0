@@ -1,0 +1,136 @@
+/* CSS declarations go here */
+html {
+    font-family: myFont2, sans-serif;;
+    background: url(NETWORK.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    //background-size: cover;
+}
+
+ul.pageNav {
+    padding:0;
+    list-style-type:none;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+ul.pageNav li{
+    display: inline;
+}
+
+ul.pageNav li a {
+    color: #FFF;
+    font-size: 16px;
+    padding: 12px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin: 0 4px;
+    text-decoration: none;
+    border: 1.5px solid #FFF;
+}
+
+
+a:hover{
+    background-color: #888;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
+p.title {
+    font-family: myFont2, sans-serif;;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 350%;
+    margin: -80px 0 0 -135px;
+    color: #FFF;
+    text-align: center;
+}
+
+p.search {
+    color: #FFF;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+form {
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    margin: 0px 0 0 -170px;
+}
+
+input.text {
+    font-family: myFont2, sans-serif;;
+    padding:8px 15px;
+    width: 300px;
+    background:rgba(0, 0, 0, 0);
+    border:2px solid #FFF;
+    color:#FFF;
+}
+
+input.text:focus {
+    outline-width: 0;
+}
+
+button {
+    font-family: myFont2, sans-serif;;
+    font-weight:bold;
+    position:absolute;
+    left:50%;
+    top: 50%;
+    margin: 50px 0 0 -42px;
+    padding:8px 15px;
+    border:2px solid #555;
+    background-color:#FFF;
+    color:#555;
+}
+
+button:hover {
+    background-color:#555;
+    color:#FFF;
+}
+
+.results-container {
+  background-color: white;
+  margin: 80px;
+  text-align: center;
+  color: black;
+  opacity: .85;
+  padding: 10px;
+}
+
+h1 {
+  font-size: 250%;
+}
+
+p {
+  font-size: 115%;
+}
+
+.node circle {
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+.node {
+  font: 10px sans-serif;
+}
+
+.inactive {
+  display: none;
+}
+
+@font-face {
+    font-family: myFont;
+    src: url(Fonts/Futura-2.ttf);
+}
+
+@font-face {
+    font-family:myFont2;
+    src: url(Fonts/GOTHAM-LIGHT.ttf);

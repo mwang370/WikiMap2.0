@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//d3js.org/d3.v3.min.js"></script>
+    <script type="text/javascript" src="/static/script.js"></script>
+    <script type = "text/javascript">
+      var $SCRIPT_ROOT= {{ request.script_root|tojson|safe }};
+    </script>
+    <link rel = "stylesheet" href = "/static/styles.css">
+    <title>WikiMap</title>
+  </head>
+
+  <body>
+    <div id="homePage">
+      <ul class ="pageNav">
+	       <li><a href="#">ABOUT</a></li>
+	       <li><a href="https://github.com/mwang370/WikiMap2.0">SOURCE CODE</a></li>
+      </ul>
+      <div class="banner">
+	       <p class="title">WIKIMAP</p>
+      </div>
+      <div class="search">
+	       <form id = "frm1" action="/search" method="post" role="form">
+	          <input name= "topic" class="text" type="text" required placeholder="Enter a topic">
+	       </form>
+	       <button id="searchButton">Submit</button>
+	       <p class="search" id="search"></p>
+      </div>
+    </div>
+
+    <div class="inactive" id="resultPage">
+      <div class = 'results-container'>
+        <div id = "loading-pg" class="inactive">
+          <img src='static/loading.gif'/>
+        </div>
+        <h1 id="result-title"></h1>
+        <div id="result-text">
+          <h3 id="result-subtitle"></h3>
+          <div class='result-topics'>
+          </div>
+        </div>
+        <div class='result-vis'>
+        </div>
+      </div>
+    </div>
+
+  </body>
+
+</html>
