@@ -7,7 +7,7 @@ var main = function() {
     //$('.text').val('');
     //$('#result-title').append(text);
 
-      var data;
+
     $('#loading-pg').show();
     $.ajax({
       type: 'POST',
@@ -24,10 +24,18 @@ var main = function() {
         }
 
         $('#loading-pg').hide();
-	  data = response;
+
       }
     });
-      graph(data);
+
+    //EVERYTHING AFTER THIS DOESN'T WORK RIGHT NOW
+    var pubs;
+    d3.json($SCRIPT_ROOT + '/search', function(error, data) {
+      if (error) return console.warn(error);
+      pubs = data;
+      graph(pubs);
+    });
+
   });
 };
 
