@@ -7,6 +7,7 @@ var main = function() {
     //$('.text').val('');
     //$('#result-title').append(text);
 
+    var data;
 
     $('#loading-pg').show();
     $.ajax({
@@ -25,16 +26,13 @@ var main = function() {
 
         $('#loading-pg').hide();
 
+        data = response;
+        graph(data);
+
       }
     });
 
     //EVERYTHING AFTER THIS DOESN'T WORK RIGHT NOW
-    var pubs;
-    d3.json($SCRIPT_ROOT + '/search', function(error, data) {
-      if (error) return console.warn(error);
-      pubs = data;
-      graph(pubs);
-    });
 
   });
 };
@@ -44,6 +42,11 @@ $(document).ready(main);
 //d3 visualization function
 var graph = function(pubs) {
   console.log(pubs);
+
+  if (pubs.children.length == 6) {
+    console.log('greater than 6');
+  }
+
   var diameter = 500;
   var margin = {top: 20, right: 120, bottom: 20, left: 120},
       width = diameter,
@@ -119,6 +122,8 @@ var graph = function(pubs) {
     nodeUpdate.select("text")
         .style("fill-opacity", 1)
         .attr("transform", function(d) { return d.x < 180 ? "translate(0)" : "rotate(180)translate(-" + (d.name.length + 50)  + ")"; });
+
+    console.log(d.name);
 
     // TODO: appropriate transform
     var nodeExit = node.exit().transition()
