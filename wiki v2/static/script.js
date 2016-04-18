@@ -1,18 +1,31 @@
 var main = function() {
+
+  //for d3 part
+  var width = 630;
+  var height = 585;
+  var maxLabel = 160;
+  var duration = 500;
+  var radius = 5;
+
+  var i = 0;
+  var root;
+
+  var tree = d3.layout.tree()
+      .size([height, width]);
+
+  var diagonal = d3.svg.diagonal()
+      .projection(function(d) { return [d.y, d.x]; });
+
+  var svg = d3.select(".result-vis").append("svg")
+              .attr("width", width)
+              .attr("height", height)
+              .append("g")
+              .attr("transform", "translate(" + maxLabel + ",0)");
+
   $('#searchButton').click(function() {
     $('#homePage').addClass('inactive');
     $('#resultPage').removeClass('inactive');
 
-    //var text = $('.text').val();
-    //$('.text').val('');
-    //$('#result-title').append(text);
-
-<<<<<<< HEAD
-    var data;
-
-=======
-      var data;
->>>>>>> origin/weird-stuff
     $('#loading-pg').show();
     $.ajax({
       type: 'POST',
@@ -22,142 +35,121 @@ var main = function() {
       success: function(response) {
         $('#result-title').append(response['name']);
         $('#result-subtitle').append('Related Topics');
+        var instructions = $('<p style="font-style: italic;">Hover over a topic on the left to read a summary. Click to explore more related topics.</p>')
+        $(instructions).insertAfter('#result-subtitle');
 
         for (i=0; i<response['children'].length; i++) {
-          var element= $('<p class="topic">'+ response['children'][i] + '</p>');
+          var name = response['children'][i]['name']
+          var element= $('<p class="topic">'+ name + '</p>');
           $('.result-topics').append(element);
         }
 
         $('#loading-pg').hide();
-<<<<<<< HEAD
 
-        data = response;
-        graph(data);
-
+        root = response;
+        root.x0 = height / 2;
+        root.y0 = 0;
+        update(response); //calls d3 vis function
+        d3.select(self.frameElement).style("height", "800px");
       }
     });
+});
 
-    //EVERYTHING AFTER THIS DOESN'T WORK RIGHT NOW
-
-=======
-	  data = response;
-      }
-    });
-      graph(data);
->>>>>>> origin/weird-stuff
+//show summary on hover
+  $("body").on("mouseenter", ".topic", function() {
+    $(this).addClass('topic-hover');
+    $( "<div class='summary'></div>").insertAfter(this);
+    var sumtitle = $('<p class>Summary:</p>');
+    $('.summary').append(sumtitle);
+    $.getJSON('/summary', {a: $(this).text()},
+    function(data) {
+      var elem = $('<p>' + data['summary'] + '</p>');
+      $('.summary').append(elem);
+    }
+  )
   });
-};
+  $("body").on("mouseleave", ".topic", function() {
+    $(this).removeClass('topic-hover');
+    $('.summary').remove();
+  });
 
-$(document).ready(main);
+  $("body").on("click", ".topic", function() {
+    console.log('clicked');
+    $.getJSON('/search2', {b: $(this).text()}),
+    function(data) {
+      console.log(data);
+    }
+  });
 
-//d3 visualization function
-var graph = function(pubs) {
-  console.log(pubs);
-
-  if (pubs.children.length == 6) {
-    console.log('greater than 6');
-  }
-
-  var diameter = 500;
-  var margin = {top: 20, right: 120, bottom: 20, left: 120},
-      width = diameter,
-      height = diameter;
-
-  var i = 0,
-      duration = 350,
-      root;
-
-  var tree = d3.layout.tree()
-      .size([360, diameter / 2 - 80])
-      .separation(function(a, b) { return (a.parent == b.parent ? 1 : 10) / a.depth; });
-
-  var diagonal = d3.svg.diagonal.radial()
-      .projection(function(d) { return [d.y, d.x / 180 * Math.PI]; });
-
-  var svg = d3.select(".result-vis").append("svg")
-      .attr("width", width )
-      .attr("height", height )
-      .append("g")
-      .attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
-
-  root = pubs;
-  console.log(root.name.length);
-  root.x0 = height / 2;
-  root.y0 = 0;
-
-  root.children.forEach(collapse); // start with all children collapsed
-  update(root);
-
-  d3.select(self.frameElement).style("height", "800px");
-
-  function update(source) {
-
+//d3 visualization functions
+  function update(source)
+{
     // Compute the new tree layout.
-    var nodes = tree.nodes(root),
-        links = tree.links(nodes);
+    var nodes = tree.nodes(root).reverse();
+    var links = tree.links(nodes);
 
     // Normalize for fixed-depth.
-    nodes.forEach(function(d) { d.y = d.depth * 80; });
+    nodes.forEach(function(d) { d.y = d.depth * maxLabel; });
 
     // Update the nodes…
     var node = svg.selectAll("g.node")
-        .data(nodes, function(d) { return d.id || (d.id = ++i); });
+        .data(nodes, function(d){
+            return d.id || (d.id = ++i);
+        });
 
     // Enter any new nodes at the parent's previous position.
-    var nodeEnter = node.enter().append("g")
+    var nodeEnter = node.enter()
+        .append("g")
         .attr("class", "node")
-        //.attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")"; })
+        .attr("transform", function(d){ return "translate(" + source.y0 + "," + source.x0 + ")"; })
         .on("click", click);
 
     nodeEnter.append("circle")
-        .attr("r", 1e-6)
-        .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+        .attr("r", 0)
+        .style("fill", function(d){
+            return d._children ? "lightsteelblue" : "white";
+        });
 
     nodeEnter.append("text")
-        .attr("x", 10)
-        .attr("dy", ".35em")
-        .attr("text-anchor", "start")
-        //.attr("transform", function(d) { return d.x < 180 ? "translate(0)" : "rotate(180)translate(-" + (d.name.length * 8.5)  + ")"; })
-        .text(function(d) { return d.name; })
-        .style("fill-opacity", 1e-6);
+        .attr("x", function(d){
+            var spacing = computeRadius(d) + 5;
+            return d.children || d._children ? -spacing : spacing;
+        })
+        .attr("dy", "3")
+        .attr("text-anchor", function(d){ return d.children || d._children ? "end" : "start"; })
+        .text(function(d){ return d.name; })
+        .style("fill-opacity", 0);
 
     // Transition nodes to their new position.
     var nodeUpdate = node.transition()
         .duration(duration)
-        .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")"; })
+        .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
 
     nodeUpdate.select("circle")
-        .attr("r", 4.5)
+        .attr("r", function(d){ return computeRadius(d); })
         .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
 
-    nodeUpdate.select("text")
-        .style("fill-opacity", 1)
-        .attr("transform", function(d) { return d.x < 180 ? "translate(0)" : "rotate(180)translate(-" + (d.name.length + 50)  + ")"; });
+    nodeUpdate.select("text").style("fill-opacity", 1);
 
-    console.log(d.name);
-
-    // TODO: appropriate transform
+    // Transition exiting nodes to the parent's new position.
     var nodeExit = node.exit().transition()
         .duration(duration)
-        //.attr("transform", function(d) { return "diagonal(" + source.y + "," + source.x + ")"; })
+        .attr("transform", function(d) { return "translate(" + source.y + "," + source.x + ")"; })
         .remove();
 
-    nodeExit.select("circle")
-        .attr("r", 1e-6);
-
-    nodeExit.select("text")
-        .style("fill-opacity", 1e-6);
+    nodeExit.select("circle").attr("r", 0);
+    nodeExit.select("text").style("fill-opacity", 0);
 
     // Update the links…
     var link = svg.selectAll("path.link")
-        .data(links, function(d) { return d.target.id; });
+        .data(links, function(d){ return d.target.id; });
 
     // Enter any new links at the parent's previous position.
     link.enter().insert("path", "g")
         .attr("class", "link")
-        .attr("d", function(d) {
-          var o = {x: source.x0, y: source.y0};
-          return diagonal({source: o, target: o});
+        .attr("d", function(d){
+            var o = {x: source.x0, y: source.y0};
+            return diagonal({source: o, target: o});
         });
 
     // Transition links to their new position.
@@ -168,37 +160,64 @@ var graph = function(pubs) {
     // Transition exiting nodes to the parent's new position.
     link.exit().transition()
         .duration(duration)
-        .attr("d", function(d) {
-          var o = {x: source.x, y: source.y};
-          return diagonal({source: o, target: o});
+        .attr("d", function(d){
+            var o = {x: source.x, y: source.y};
+            return diagonal({source: o, target: o});
         })
         .remove();
 
     // Stash the old positions for transition.
-    nodes.forEach(function(d) {
-      d.x0 = d.x;
-      d.y0 = d.y;
+    nodes.forEach(function(d){
+        d.x0 = d.x;
+        d.y0 = d.y;
     });
-  }
+}
 
-  // Toggle children on click.
-  function click(d) {
-    if (d.children) {
-      d._children = d.children;
-      d.children = null;
-    } else {
-      d.children = d._children;
-      d._children = null;
+function computeRadius(d)
+{
+    if(d.children || d._children) return radius + (radius * nbEndNodes(d) / 10);
+    else return radius;
+}
+
+function nbEndNodes(n)
+{
+    nb = 0;
+    if(n.children){
+        n.children.forEach(function(c){
+            nb += nbEndNodes(c);
+        });
+    }
+    else if(n._children){
+        n._children.forEach(function(c){
+            nb += nbEndNodes(c);
+        });
+    }
+    else nb++;
+
+    return nb;
+}
+
+function click(d)
+{
+    if (d.children){
+        d._children = d.children;
+        d.children = null;
+    }
+    else{
+        d.children = d._children;
+        d._children = null;
     }
     update(d);
-  }
+}
 
-  // Collapse nodes
-  function collapse(d) {
-    if (d.children) {
+function collapse(d){
+    if (d.children){
         d._children = d.children;
         d._children.forEach(collapse);
         d.children = null;
-      }
-  }
+    }
 }
+
+};
+
+$(document).ready(main);
